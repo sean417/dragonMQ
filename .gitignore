@@ -1,0 +1,15 @@
+/.project
+*.iml
+**/target
+**/output
+**/logs
+*.idea
+*.jar
+*.DS_Store
+tmlog.lck
+tmlog*.log
+jd-gui.cfg
+
+!build/**/*.jar
+
+carrera-producer/dependency-reduced-pom.xml
