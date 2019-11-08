@@ -14,22 +14,24 @@ import java.nio.channels.FileChannel;
 public class AppendFile {
 
     public static void main(String[] args) throws Exception {
-
+        method1();
     }
 
 
     public static void method1() throws Exception {
 
-        File file = new File("data.txt");
-        FileOutputStream outputStream = new FileOutputStream(file);
-        FileChannel channel = outputStream.getChannel();
+        File file = new File("D:\\copy.txt");
+        FileChannel channel = new RandomAccessFile(file, "rw").getChannel();
+        channel.map()
+//        FileOutputStream outputStream = new FileOutputStream(file);
+//        FileChannel channel = outputStream.getChannel();
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         String string = "java nio";
         buffer.put(string.getBytes());
         buffer.flip();     //此处必须要调用buffer的flip方法
         channel.write(buffer);
         channel.close();
-        outputStream.close();
+//        outputStream.close();
 
     }
 }
