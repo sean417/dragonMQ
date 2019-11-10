@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
+import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
 /**
@@ -14,24 +15,15 @@ import java.nio.channels.FileChannel;
 public class AppendFile {
 
     public static void main(String[] args) throws Exception {
-        method1();
+        File file = new File("D:\\copy.txt");
+        appendMsg(file,"java nio".getBytes());
     }
 
 
-    public static void method1() throws Exception {
+    public static void appendMsg(File file,byte[] bytes) throws Exception {
 
-        File file = new File("D:\\copy.txt");
-        FileChannel channel = new RandomAccessFile(file, "rw").getChannel();
-        channel.map()
-//        FileOutputStream outputStream = new FileOutputStream(file);
-//        FileChannel channel = outputStream.getChannel();
-        ByteBuffer buffer = ByteBuffer.allocate(1024);
-        String string = "java nio";
-        buffer.put(string.getBytes());
-        buffer.flip();     //此处必须要调用buffer的flip方法
-        channel.write(buffer);
-        channel.close();
-//        outputStream.close();
+        MappedByteBuffer mappedByteBuffer = new RandomAccessFile(file, "rw").getChannel().map(FileChannel.MapMode.READ_WRITE,0,file.length());
 
+        mappedByteBuffer.put(bytes);
     }
 }
