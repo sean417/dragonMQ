@@ -11,6 +11,7 @@
     <modules>
         <module>store</module>
         <module>common</module>
+        <module>broker</module>
     </modules>
     <dependencies>
 
